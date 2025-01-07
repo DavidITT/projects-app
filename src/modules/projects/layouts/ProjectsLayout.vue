@@ -1,18 +1,25 @@
 <template>
-  <div class="flex flex-col">
-    <TopMenu />
-    <main class="flex flex-row">
-      <!-- side Menu -->
-      <SideMenu />
-      <router-view />
+  <div class="h-screen antialiased bg-gray-100">
+    <!-- Backdrop -->
+    <Backdrop />
+    <!-- Side Menu -->
+    <SideMenu />
+    <!-- End Side Menu -->
+    <main class="w-screen">
+      <!-- Navbar -->
+      <Navbar />
+
+      <router-view/>
     </main>
   </div>
 </template>
 
-
 <script setup lang="ts">
-import TopMenu from '@/modules/common/components/TopMenu.vue'
-import SideMenu from '@/modules/projects/components/SideMenu.vue'
+
+import Backdrop from '@/modules/common/components/Backdrop.vue'
+import SideMenu from '@/modules/common/components/SideMenu.vue'
+import Navbar from '@/modules/common/components/Navbar.vue'
+
 </script>
 
 <style scoped>
