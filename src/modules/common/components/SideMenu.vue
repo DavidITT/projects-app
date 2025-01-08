@@ -1,56 +1,9 @@
 <template>
   <aside>
-    <!--    <div class="flex-1 space-y-10">-->
-    <!--      <RouterLink to="/" class="text-lg font-bold text-blue-600 ml-3">My Project App</RouterLink>-->
-    <!--      <RouterLink to="/" >-->
-    <!--        <h2 class="text-lg font-bold mx-4">Proyectos</h2>-->
-    <!--        <div class="flex-none">-->
-    <!--          <label for="my-drawer-2" class="btn btn-square btn-ghost drawer-button">-->
-    <!--            <svg-->
-    <!--              xmlns="http://www.w3.org/2000/svg"-->
-    <!--              fill="none"-->
-    <!--              viewBox="0 0 24 24"-->
-    <!--              class="inline-block h-5 w-5 stroke-current">-->
-    <!--              <path-->
-    <!--                stroke-linecap="round"-->
-    <!--                stroke-linejoin="round"-->
-    <!--                stroke-width="2"-->
-    <!--                d="M4 6h16M4 12h16M4 18h16"></path>-->
-    <!--            </svg>-->
-    <!--          </label>-->
-    <!--        </div>-->
-    <!--      </RouterLink>-->
-    <!--    </div>-->
-
-    <!--    <p v-if="!projectsStore.existProjects" class="text-sm text-gray-500 mx-4">No hay proyectos</p>-->
-    <!--    <ul v-else class="menu rounded-box w-full">-->
-    <!--      <li v-for="project in projectsStore.projectList" :key="project.id">-->
-    <!--        <template v-if="project.tasks.length > 0">-->
-    <!--          <details>-->
-    <!--            <summary>-->
-    <!--              <RouterLink :to="`/project/${project.id}`">-->
-    <!--                {{ project.name }}-->
-    <!--              </RouterLink>-->
-    <!--            </summary>-->
-    <!--            <ul>-->
-    <!--              <li v-for="task in project.tasks" :key="task.id">-->
-    <!--                <RouterLink :to="`/project/${project.id}`">{{ task.name }}</RouterLink>-->
-    <!--              </li>-->
-    <!--            </ul>-->
-    <!--          </details>-->
-    <!--        </template>-->
-    <!--        <template v-else>-->
-    <!--          <RouterLink :to="`/project/${project.id}`">-->
-    <!--            {{ project.name }}-->
-    <!--          </RouterLink>-->
-    <!--        </template>-->
-    <!--      </li>-->
-    <!--    </ul>-->
-
-    <transition name="sidebar">
+    <transition name="sidebar" mode="out-in">
       <div
         v-if="uiStore.isSidebarOpen"
-        class="fixed inset-y-0 z-10 flex w-80"
+        class="fixed inset-y-0 z-20 flex w-80"
       >
         <div class="absolute inset-0 w-full h-full text-white bg-white"></div>
         <!-- Sidebar content -->
@@ -137,10 +90,6 @@
 
 <script setup lang="ts">
 
-// import { useProjectsStore } from '@/modules/projects/store/projects.store.ts'
-//
-// const projectsStore = useProjectsStore()
-
 import { useUiStore } from '@/modules/common/stores/ui.store.ts'
 
 const uiStore = useUiStore()
@@ -148,16 +97,19 @@ const uiStore = useUiStore()
 </script>
 
 <style scoped>
+
 .sidebar-enter-active,
 .sidebar-leave-active {
-  transition: transform 0.3s;
+  transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.sidebar-enter {
-  transform: translateX(-100%);
-}
-
+.sidebar-enter,
 .sidebar-leave-to {
   transform: translateX(-100%);
+}
+
+.sidebar-enter-to,
+.sidebar-leave {
+  transform: translateX(0);
 }
 </style>

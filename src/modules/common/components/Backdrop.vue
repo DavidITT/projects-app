@@ -1,6 +1,6 @@
 <template>
   <!-- Backdrop -->
-  <div v-if="uiStore.isSidebarOpen" @click="uiStore.toggleSidebar()" class="backdrop"></div>
+  <div v-if="uiStore.isSidebarOpen" @click="uiStore.toggleSidebar()" class="backdrop z-20"></div>
 </template>
 
 <script setup lang="ts">
@@ -18,6 +18,6 @@ const uiStore = useUiStore()
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(201, 201, 201, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 </style>

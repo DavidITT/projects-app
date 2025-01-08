@@ -1,11 +1,11 @@
 <template>
-  <div class="h-screen antialiased bg-gray-100">
+  <div class="h-screen antialiased">
     <!-- Backdrop -->
     <Backdrop />
     <!-- Side Menu -->
     <SideMenu />
     <!-- End Side Menu -->
-    <main class="w-screen">
+    <main class="w-full bg-gray-100">
       <!-- Navbar -->
       <Navbar />
 
