@@ -29,7 +29,7 @@ const uiStore = useUiStore()
 const projectstore = useProjectsStore()
 
 const inputValue = ref('')
-const inputRef = ref<HTMLInputElement>(null)
+const inputRef = ref<HTMLInputElement | null>(null)
 
 
 const submitValue = () => {

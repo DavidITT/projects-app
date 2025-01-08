@@ -16,9 +16,9 @@
 
 <script setup lang="ts">
 
-import Backdrop from '@/modules/common/components/Backdrop.vue'
+import Backdrop from '@/modules/common/components/BackdropComponent.vue'
 import SideMenu from '@/modules/common/components/SideMenu.vue'
-import Navbar from '@/modules/common/components/Navbar.vue'
+import Navbar from '@/modules/common/components/NavbarComponent.vue'
 
 </script>
 

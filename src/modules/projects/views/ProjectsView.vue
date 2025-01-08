@@ -28,14 +28,14 @@
         </div>
       </div>
       <div class="text-end mt-10 block md:hidden">
-        <CreateProjectButton />
+        <CreateProjectButton></CreateProjectButton>
       </div>
       <transition name="fade" mode="out-in">
         <template v-if="uiStore.howProjectsView === 'grid'">
-          <ProjectsGrid key="grid" />
+          <ProjectsGrid key="grid"></ProjectsGrid>
         </template>
         <template v-else-if="uiStore.howProjectsView === 'list'">
-          <ProjectsTable key="list" />
+          <ProjectsTable key="list" ></ProjectsTable>
         </template>
       </transition>
     </div>

@@ -65,8 +65,8 @@ import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import BreadCrumbs from '@/modules/projects/components/BreadCrumbs.vue'
 import { useProjectsStore } from '@/modules/projects/store/projects.store.ts'
-import Save from '@/modules/common/icons/Save.vue'
-import Close from '@/modules/common/icons/Close.vue'
+import Save from '@/modules/common/icons/SaveIcon.vue'
+import Close from '@/modules/common/icons/CloseIcon.vue'
 
 interface Props {
   id: string

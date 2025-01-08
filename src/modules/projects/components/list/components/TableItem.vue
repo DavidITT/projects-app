@@ -27,8 +27,8 @@
 
 <script setup lang="ts">
 import { useProjectsStore } from '@/modules/projects/store/projects.store.ts'
-import Directory from '@/modules/common/icons/Directory.vue'
-import Options from '@/modules/common/icons/Options.vue'
+import Directory from '@/modules/common/icons/DirectoryIcon.vue'
+import Options from '@/modules/common/icons/OptionsIcon.vue'
 
 const projectsStore = useProjectsStore()
 </script>

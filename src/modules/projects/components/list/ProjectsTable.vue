@@ -23,8 +23,8 @@
   </div>
 </template>
 
-<script setup>
-import Filters from '@/modules/projects/components/list/components/Filters.vue'
+<script setup lang="ts">
+import Filters from '@/modules/projects/components/list/components/FiltersComponent.vue'
 import TableItem from '@/modules/projects/components/list/components/TableItem.vue'
 </script>
 
