@@ -15,7 +15,6 @@
         </button>
       </form>
 
-
       <div class="overflow-x-auto">
         <table class="min-w-full bg-white border border-border mt-4">
           <thead class="hidden md:table-header-group border-b">
@@ -35,7 +34,7 @@
                        :checked="!! task.completedAt"
                        class="checkbox checkbox-info bg-white border-blue-500 checkbox-sm checked:bg-blue-500 checked:border-blue-700 checked:ring-20">
               </th>
-              <td @dblclick="toggleDoubleClick(index, task.name)">
+              <td @dblclick="toggleDoubleClick(index, task.name)" class="hidden md:block">
                 <div v-if="editTaskIndex === index">
                   <form @submit.prevent="updateTaskProject(projectStore.projectInfo.id, task.id)"
                         class="flex space-x-2 items-center w-full">
@@ -50,7 +49,11 @@
                     <Close @close-input="closeInput"></Close>
                   </form>
                 </div>
-                <span v-else class="cursor-pointer">{{ task.name }}</span>
+                <span v-else class="cursor-pointer">{{ shortText(task.name) }}</span>
+
+              </td>
+              <td class="block md:hidden">
+                <span>{{ shortText(task.name) }}</span>
               </td>
               <td class="text-center">{{ task.completedAt }}</td>
               <td>
@@ -58,55 +61,14 @@
               </td>
             </tr>
           </template>
+          <template>
+            <tr>
+              <td colspan="3" class="text-center">No hay ninguna tarea</td>
+            </tr>
+          </template>
           </tbody>
         </table>
       </div>
-      <!--        <table class="table">-->
-      <!--          &lt;!&ndash; head &ndash;&gt;-->
-      <!--          <thead>-->
-      <!--          <tr>-->
-      <!--            <th class="w-14">Completada</th>-->
-      <!--            <th>Tarea</th>-->
-      <!--            <th>Completada en</th>-->
-      <!--          </tr>-->
-      <!--          </thead>-->
-      <!--          <tbody>-->
-      <!--          <template v-if="projectStore.projectInfo">-->
-      <!--            <tr class="hover" v-for="(task, index) in projectStore.projectInfo.tasks" :key="task.id">-->
-      <!--              <th class="text-center">-->
-      <!--                <input @change="projectStore.toggleTask(projectStore.projectInfo.id, task.id)" type="checkbox"-->
-      <!--                       :checked="!! task.completedAt" class="checkbox checkbox-primary checkbox-sm">-->
-      <!--              </th>-->
-      <!--              <td @dblclick="toggleDoubleClick(index, task.name)">-->
-      <!--                <div v-if="editTaskIndex === index">-->
-      <!--                  <form @submit.prevent="updateTaskProject(projectStore.projectInfo.id, task.id)"-->
-      <!--                        class="flex space-x-2 items-center w-full">-->
-      <!--                    <input-->
-      <!--                      type="text"-->
-      <!--                      class="input input-sm input-primary opacity-60 transition-all hover:opacity-100 focus:opacity-100 flex-1"-->
-      <!--                      :placeholder="task.name"-->
-      <!--                      v-model.trim="updateTask">-->
-      <!--                    <button type="submit" v-if="updateTask !== previousTaskValue">-->
-      <!--                      <Save />-->
-      <!--                    </button>-->
-      <!--                    <Close @close-input="closeInput" />-->
-      <!--                  </form>-->
-
-      <!--                </div>-->
-      <!--                <span v-else class="cursor-pointer">{{ task.name }}</span>-->
-      <!--              </td>-->
-      <!--              <td>{{ task.completedAt }}</td>-->
-      <!--            </tr>-->
-      <!--          </template>-->
-
-      <!--          <template v-else>-->
-      <!--            <tr>-->
-      <!--              <td colspan="3" class="text-center">No hay ninguna tarea</td>-->
-      <!--            </tr>-->
-      <!--          </template>-->
-
-      <!--          </tbody>-->
-      <!--        </table>-->
     </section>
   </div>
 </template>
@@ -120,6 +82,7 @@ import BreadCrumbs from '@/modules/projects/components/BreadCrumbs.vue'
 import Save from '@/modules/common/icons/SaveIcon.vue'
 import Close from '@/modules/common/icons/CloseIcon.vue'
 import OptionsIcon from '@/modules/common/icons/OptionsIcon.vue'
+import { shortText } from '../../common/helpers/shortText.ts'
 
 const route = useRoute()
 const projectStore = useProjectsStore()
@@ -155,7 +118,6 @@ const updateTaskProject = (projectId: string, taskId: string) => {
 const closeInput = () => {
   editTaskIndex.value = null
 }
-
 
 onMounted(() => {
   projectStore.getProjectInfo(route.params.id)

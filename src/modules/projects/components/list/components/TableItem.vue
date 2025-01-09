@@ -7,7 +7,7 @@
       <div class="flex flex-row">
         <Directory />
         <RouterLink :to="`/project/${project.id}`" class="capitalize">
-          {{ project.name }}
+          {{ shouldShorten ? shortText(project.name) : project.name }}
         </RouterLink>
       </div>
     </td>
@@ -29,8 +29,24 @@
 import { useProjectsStore } from '@/modules/projects/store/projects.store.ts'
 import Directory from '@/modules/common/icons/DirectoryIcon.vue'
 import Options from '@/modules/common/icons/OptionsIcon.vue'
+import { onMounted, onUnmounted, ref } from 'vue'
+import { shortText } from '@/modules/common/helpers/shortText.ts'
 
 const projectsStore = useProjectsStore()
+const shouldShorten = ref<boolean>(false)
+
+const handleResize = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+   window.innerWidth <= 768 ? shouldShorten.value = true : shouldShorten.value = false
+}
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <style scoped>

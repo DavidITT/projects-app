@@ -1,7 +1,10 @@
 <template>
   <div class="my-5">
     <div class="flex flex-col-reverse md:flex-row justify-between items-end lg:items-center">
-      <Filters />
+      <Filters></Filters>
+      <template class="hidden md:block">
+        <CreateProjectButton></CreateProjectButton>
+      </template>
     </div>
     <div class="overflow-x-auto">
       <table class="min-w-full bg-white border border-border mt-4">
@@ -26,6 +29,7 @@
 <script setup lang="ts">
 import Filters from '@/modules/projects/components/list/components/FiltersComponent.vue'
 import TableItem from '@/modules/projects/components/list/components/TableItem.vue'
+import CreateProjectButton from '@/modules/projects/components/CreateProjectButton.vue'
 </script>
 
 <style scoped>
