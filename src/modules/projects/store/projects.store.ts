@@ -3,9 +3,13 @@ import { computed, ref } from 'vue'
 import type { Project } from '@/modules/projects/interfaces/project.interface.ts'
 import { v4 as uuidv4 } from 'uuid'
 import { useLocalStorage } from '@vueuse/core'
+import { type RouteParamValue, useRouter } from 'vue-router'
 
 export const useProjectsStore = defineStore('projects', () => {
+
+  const router = useRouter()
   const projects = ref(useLocalStorage<Project[]>('projects', []))
+  const project = ref<Project>()
 
   const addProject = (name: string) => {
     if (name.length === 0) return
@@ -16,7 +20,19 @@ export const useProjectsStore = defineStore('projects', () => {
     })
   }
 
-  const addTaskToProject = (task: string, idProject: string) => {
+  const getProjectInfo = (id: string | RouteParamValue[]) => {
+    const foundProject = projects.value.find((x) => x.id === id);
+    if (foundProject) {
+      project.value = foundProject;
+    } else {
+      router.replace('/not-found').catch(() => {
+        throw new Error('Navigation failed');
+      });
+    }
+  };
+
+  const addTaskToProject = (task: string, idProject: string | undefined) => {
+    if (!idProject) return;
     const project = projects.value.find((project) => project.id === idProject)
     if (!project) return
     project.tasks.push({
@@ -56,10 +72,12 @@ export const useProjectsStore = defineStore('projects', () => {
   return {
     //properties
     projects,
+    project,
 
     //getters
     projectList: computed(() => [...projects.value]),
     existProjects: computed(() => projects.value.length > 0),
+    projectInfo: computed(() => project.value),
     projectsWithCompletion: computed(() => {
       return projects.value.map(project => {
 
@@ -79,6 +97,7 @@ export const useProjectsStore = defineStore('projects', () => {
     //actions
     addProject,
     addTaskToProject,
+    getProjectInfo,
     updateTaskToProject,
     toggleTask
   }
