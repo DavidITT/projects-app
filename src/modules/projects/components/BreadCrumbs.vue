@@ -11,7 +11,7 @@
       <li>
       <span class="inline-flex items-center gap-2">
         <FileIcon></FileIcon>
-         {{ name }}
+         <span class="capitalize">{{ name }}</span>
       </span>
       </li>
     </ul>
